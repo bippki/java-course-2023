@@ -13,7 +13,7 @@ public class Test2 {
     static Arguments[] rectangles() {
         return new Arguments[]{
             Arguments.of(new Rectangle(4,8)),
-            Arguments.of(new Square(6))
+            Arguments.of(new Square(12))
         };
     }
 

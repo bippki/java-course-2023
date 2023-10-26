@@ -22,7 +22,7 @@ public class Rectangle {
     }
 
     public Rectangle setLenght(int lenght) {
-        return new Rectangle(width, this.lenght);
+        return new Rectangle(lenght, this.width);
     }
     public double area() {
         return width * lenght;
