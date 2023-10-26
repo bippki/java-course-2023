@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Test2 {
     static Arguments[] rectangles() {
         return new Arguments[]{
-            Arguments.of(new Rectangle()),
-            Arguments.of(new Square())
+            Arguments.of(new Rectangle(4,8)),
+            Arguments.of(new Square(6))
         };
     }
 

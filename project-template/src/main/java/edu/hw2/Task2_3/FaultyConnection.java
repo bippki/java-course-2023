@@ -7,8 +7,8 @@ public class FaultyConnection implements Connection {
 
     @Override
     public void execute(String command) {
-        if (random.nextInt(100) < 30) { // 30% шанс на ошибку
-            throw new ConnectionException();
+        if (random.nextInt(100) < 30) {
+            throw new ConnectionException("Command execution failed!");
         }
         System.out.println("Executing: " + command);
     }

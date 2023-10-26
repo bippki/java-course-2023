@@ -11,18 +11,24 @@ public final class PopularCommandExecutor {
 
     public void updatePackages() {
         tryExecute("apt update");
+
     }
 
     void tryExecute(String command) {
+        ConnectionException exc = null;
         for (int i = 0; i < maxAttempts; i++) {
             try (Connection connection = manager.getConnection()) {
                 connection.execute(command);
                 return;
             } catch (Exception e) {
-                if (i == maxAttempts - 1) {
-                    throw new ConnectionException();
+                if (exc == null) {
+                    exc = new ConnectionException();
                 }
+                exc.addSuppressed(e);
             }
+        }
+        if (exc != null) {
+            throw exc;
         }
     }
 }
