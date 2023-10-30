@@ -3,6 +3,7 @@ package edu.project;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.nio.file.Files;
 import java.util.*;
 
 
@@ -12,6 +13,7 @@ class HangmanGame {
     private int attemptsLeft;
     private final List<Player> players;
     private final HangmanView view;
+    private final Set<String> playerNames;
 
     public HangmanGame(JSONObject config) {
         int maxAttempts = config.getInt("maxAttempts");
@@ -25,10 +27,16 @@ class HangmanGame {
         this.attemptsLeft = maxAttempts;
         this.players = new ArrayList<>();
         this.view = new HangmanView();
+        this.playerNames = new HashSet<>();
     }
 
     public void addPlayer(Player player) {
-        players.add(player);
+        if (!playerNames.contains(player.getName())) {
+            players.add(player);
+            playerNames.add(player.getName());
+        } else {
+            System.out.println("Current name already exist.");
+        }
     }
 
     public void startGame() {
@@ -36,13 +44,32 @@ class HangmanGame {
         Scanner scanner = new Scanner(System.in);
         view.displayEnterPlayers();
 
-        int numPlayers = scanner.nextInt();
-        scanner.nextLine();
+        int numPlayers;
+        while (true) {
+            try {
+                numPlayers = Integer.parseInt(scanner.nextLine());
+                if (numPlayers > 0 && numPlayers <5) {
+                    break;
+                } else {
+                    System.out.println("Enter a number greater than zero!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter must be digit!");
+            }
+        }
 
         for (int i = 0; i < numPlayers; i++) {
             view.displayPlayerEnterName(i);
-            String playerName = scanner.nextLine();
-            addPlayer(new Player(playerName));
+            String playerName;
+            while (true) {
+                playerName = scanner.nextLine();
+                if (!playerNames.contains(playerName)) {
+                    addPlayer(new Player(playerName));
+                    break;
+                } else {
+                    System.out.println("Current name already exist");
+                }
+            }
         }
 
         while (!isGameOver()) {
@@ -105,7 +132,7 @@ class HangmanGame {
             attemptsLeft--;
             player.updateScore(-1);
         } else {
-            player.updateScore(1);
+            player.updateScore(3);
         }
 
     }
@@ -115,5 +142,9 @@ class HangmanGame {
 
     public int getAttemptsLeft() {
         return attemptsLeft;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

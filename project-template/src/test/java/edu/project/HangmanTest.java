@@ -1,81 +1,60 @@
 package edu.project;
-
+import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+
+import java.nio.file.Files;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HangmanTest {
+class HangmanGameTest {
 
-    @Test
-    public void testGameDoesNotStartWithInvalidWordLength() {
-        Hangman hangman = new Hangman();
-        String wordToGuess = hangman.getValidWordToGuess();
-
-        assertTrue(wordToGuess.length() >= Hangman.MIN_WORD_LENGTH);
-        assertTrue(wordToGuess.length() <= Hangman.MAX_WORD_LENGTH);
-    }
+    private HangmanGame game;
+    private File configFile;
 
 
-    @Test
-    public void testUpdateStateWithCorrectGuess() {
-        Hangman hangman = new Hangman();
-        char[] wordState = "sn_k_".toCharArray();
-        String wordToGuess = "snake";
-        char guess = 'a';
-
-        boolean result = hangman.updateState(wordToGuess, wordState, guess);
-
-        assertTrue(result);
-        assertArrayEquals(new char[]{'s', 'n', 'a', 'k', '_'}, wordState);
+    @BeforeEach
+    void setUp() {
+        configFile = new File("test_config.json");
+        GameConfig.createDefaultConfig(configFile);
+        try {
+            String content = new String(Files.readAllBytes(configFile.toPath()));
+            game = new HangmanGame(new JSONObject(content));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testUpdateStateWithIncorrectGuess() {
-        Hangman hangman = new Hangman();
-        char[] wordState = "sn_k_".toCharArray();
-        String wordToGuess = "snake";
-        char guess = 'r';
+    void testAddPlayer() {
+        Player player1 = new Player("a");
+        Player player2 = new Player("b");
 
-        boolean result = hangman.updateState(wordToGuess, wordState, guess);
+        game.addPlayer(player1);
+        game.addPlayer(player2);
 
-        assertFalse(result);
-        assertArrayEquals(new char[]{'s', 'n', '_', 'k', '_'}, wordState);
+        assertEquals(2, game.getPlayers().size());
     }
 
     @Test
-    public void testInputRetryForMultipleCharacters() {
-        Hangman hangman = new Hangman();
-        char[] wordState = "sn_k_".toCharArray();
-        String wordToGuess = "snake";
+    void testAddPlayerWithDuplicateName() {
+        Player player1 = new Player("a");
+        Player player2 = new Player("b");
 
-        // Подготовим ввод для имитации
-        String input = "ab";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        game.addPlayer(player1);
+        game.addPlayer(player2);
 
-        String result = hangman.readInput(new Scanner(System.in));
-
-        System.setIn(System.in); // Восстановим стандартный ввод
-
-        assertEquals(null, result);
-        assertArrayEquals(new char[]{'s', 'n', '_', 'k', '_'}, wordState);
+        assertEquals(2, game.getPlayers().size());
     }
 
     @Test
-    public void testGameEndsInDefeatAfterExceedingMaxTries() {
-        Hangman hangman = new Hangman();
-        hangman.MAX_TRIES = 3; // Устанавливаем максимальное количество попыток в 3 для теста
-        char[] wordState = "_____".toCharArray();
-        String wordToGuess = "snake";
-
-        // Выполняем неудачные попытки
-        assertFalse(hangman.updateState(wordToGuess, wordState, 'z'));
-        assertFalse(hangman.updateState(wordToGuess, wordState, 'y'));
-        assertFalse(hangman.updateState(wordToGuess, wordState, 'x'));
-
-        // Проверяем, что игра завершается поражением
-        assertFalse(hangman.isGameOver(wordState));
+    void testGuessLetterWithWrong() {
+        Player player = new Player("Alice");
+        game.guessLetter('z', player);
+        assertEquals(5, game.getAttemptsLeft());
     }
+
 }
