@@ -7,11 +7,8 @@ public class Task3_4 {
     private Task3_4() {
 
     }
-    public static String convertToRoman(int num) {
-        if (num < 1 || num > 3999) {
-            throw new IllegalArgumentException("Number must be between 1 and 3999");
-        }
-        Map<Integer, String> romanDict = new HashMap<>();
+    private static final Map<Integer, String> romanDict = new HashMap<>();
+    static {
         romanDict.put(1, "I");
         romanDict.put(4, "IV");
         romanDict.put(5, "V");
@@ -25,7 +22,13 @@ public class Task3_4 {
         romanDict.put(500, "D");
         romanDict.put(900, "CM");
         romanDict.put(1000, "M");
-
+    }
+    static final int MIN = 1;
+    static final int MAX = 3999;
+    public static String convertToRoman(int num) {
+        if (num < MIN || num > MAX) {
+            throw new IllegalArgumentException("Number must be between 1 and 3999");
+        }
         StringBuilder digit = new StringBuilder();
         int[] values = romanDict.keySet().stream()
             .sorted((a, b) -> b - a)
