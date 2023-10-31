@@ -1,4 +1,4 @@
-package edu.project;
+package edu.Hangman;
 
 class Player {
     private final String name;

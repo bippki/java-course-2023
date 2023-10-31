@@ -1,4 +1,4 @@
-package edu.project;
+package edu.Hangman;
 
 import java.util.ArrayList;
 import java.util.List;

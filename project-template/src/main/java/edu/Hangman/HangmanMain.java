@@ -1,4 +1,4 @@
-package edu.project;
+package edu.Hangman;
 
 import org.json.JSONObject;
 
