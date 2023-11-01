@@ -1,5 +1,4 @@
-package edu.Hangman;
-
+package edu.HangmanFinal;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

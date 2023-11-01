@@ -1,4 +1,4 @@
-package edu.Hangman;
+package edu.HangmanFinal;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;

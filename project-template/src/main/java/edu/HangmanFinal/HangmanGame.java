@@ -1,9 +1,7 @@
-package edu.project;
-
+package edu.HangmanFinal;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.nio.file.Files;
 import java.util.*;
 
 

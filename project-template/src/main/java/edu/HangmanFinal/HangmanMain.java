@@ -1,4 +1,4 @@
-package edu.Hangman;
+package edu.HangmanFinal;
 
 import org.json.JSONObject;
 
@@ -10,14 +10,14 @@ public class HangmanMain {
     public static void main(String[] args) {
         File configFile = new File("config.json");
         if (!configFile.exists()) {
-            GameConfig.createDefaultConfig(configFile);
+            edu.HangmanFinal.GameConfig.createDefaultConfig(configFile);
         }
 
         try {
             String content = new String(Files.readAllBytes(Paths.get("config.json")));
             JSONObject obj = new JSONObject(content);
 
-            HangmanGame game = new HangmanGame(obj);
+            edu.HangmanFinal.HangmanGame game = new edu.HangmanFinal.HangmanGame(obj);
 
             game.startGame();
 

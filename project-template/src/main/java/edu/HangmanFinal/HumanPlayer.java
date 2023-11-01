@@ -1,5 +1,6 @@
-package edu.Hangman;
+package edu.HangmanFinal;
 
 interface HumanPlayer {
     char getGuess();
 }
+
