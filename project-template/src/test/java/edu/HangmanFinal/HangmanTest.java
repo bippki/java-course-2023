@@ -23,7 +23,8 @@ class HangmanGameTest {
         GameConfig.createDefaultConfig(configFile);
         try {
             String content = new String(Files.readAllBytes(configFile.toPath()));
-            game = new HangmanGame(new JSONObject(content));
+            HumanPlayer playerMain = new HumanPlayer("a");
+            game = new HangmanGame(new JSONObject(content),playerMain);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,8 +32,8 @@ class HangmanGameTest {
 
     @Test
     void testAddPlayer() {
-        Player player1 = new Player("a");
-        Player player2 = new Player("b");
+        HumanPlayer player1 = new HumanPlayer("a");
+        HumanPlayer player2 = new HumanPlayer("b");
 
         game.addPlayer(player1);
         game.addPlayer(player2);
@@ -42,8 +43,8 @@ class HangmanGameTest {
 
     @Test
     void testAddPlayerWithDuplicateName() {
-        Player player1 = new Player("a");
-        Player player2 = new Player("b");
+        HumanPlayer player1 = new HumanPlayer("a");
+        HumanPlayer player2 = new HumanPlayer("b");
 
         game.addPlayer(player1);
         game.addPlayer(player2);
@@ -53,7 +54,7 @@ class HangmanGameTest {
 
     @Test
     void testGuessLetterWithWrong() {
-        Player player = new Player("Alice");
+        HumanPlayer player = new HumanPlayer("Alice");
         game.guessLetter('z', player);
         assertEquals(5, game.getAttemptsLeft());
     }

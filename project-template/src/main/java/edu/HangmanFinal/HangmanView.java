@@ -2,13 +2,12 @@ package edu.HangmanFinal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-class HangmanView implements HumanPlayer {
-    private final Scanner scanner;
+class HangmanView implements Player {
+    private final InputHandler inputHandler;
 
     public HangmanView() {
-        this.scanner = new Scanner(System.in);
+        this.inputHandler = new InputHandler();
     }
 
     public void displayEnterPlayers() {
@@ -31,11 +30,11 @@ class HangmanView implements HumanPlayer {
         System.out.println("Attempts remaining: " + attempts);
     }
 
-    public void displayGameOver(List<Player> players) {
+    public void displayGameOver(List<HumanPlayer> players) {
         int maxScore = Integer.MIN_VALUE;
-        List<Player> winners = new ArrayList<>();
+        List<HumanPlayer> winners = new ArrayList<>();
 
-        for (Player player : players) {
+        for (HumanPlayer player : players) {
             displayPlayerScore(player);
             if (player.getScore() > maxScore) {
                 maxScore = player.getScore();
@@ -50,37 +49,17 @@ class HangmanView implements HumanPlayer {
             System.out.println("Congratulations! Player " + winners.get(0).getName() + " wins!");
         } else {
             System.out.println("It's a tie between the following players:");
-            for (Player player : winners) {
+            for (HumanPlayer player : winners) {
                 System.out.println(player.getName());
             }
         }
     }
 
-    public void displayPlayerScore(Player player) {
+    public void displayPlayerScore(HumanPlayer player) {
         System.out.println("Player: " + player.getName() + ", Score: " + player.getScore());
     }
 
     public char getGuess() {
-        System.out.print("Guess a letter (Ctrl+D to surrender): ");
-        String input;
-        char guess;
-        while (true) {
-            try {
-                input = scanner.nextLine();
-                if (input.length() != 1) {
-                    System.out.println("Please enter a single letter.");
-                } else {
-                    guess = input.charAt(0);
-                    if (!Character.isLetter(guess)) {
-                        System.out.println("Please enter a valid letter.");
-                    } else {
-                        return guess;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Surrendered!");
-                System.exit(0);
-            }
-        }
+        return inputHandler.getGuess();
     }
 }

@@ -10,14 +10,15 @@ public class HangmanMain {
     public static void main(String[] args) {
         File configFile = new File("config.json");
         if (!configFile.exists()) {
-            edu.HangmanFinal.GameConfig.createDefaultConfig(configFile);
+            GameConfig.createDefaultConfig(configFile);
         }
 
         try {
             String content = new String(Files.readAllBytes(Paths.get("config.json")));
             JSONObject obj = new JSONObject(content);
 
-            edu.HangmanFinal.HangmanGame game = new edu.HangmanFinal.HangmanGame(obj);
+            HumanPlayer player = new HumanPlayer("MainName");
+            HangmanGame game = new HangmanGame(obj, player);
 
             game.startGame();
 

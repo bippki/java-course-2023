@@ -9,11 +9,11 @@ class HangmanGame {
     private final String word;
     private final char[] guessedLetters;
     private int attemptsLeft;
-    private final List<Player> players;
+    private final List<HumanPlayer> players;
     private final HangmanView view;
     private final Set<String> playerNames;
 
-    public HangmanGame(JSONObject config) {
+    public HangmanGame(JSONObject config, HumanPlayer player) {
         int maxAttempts = config.getInt("maxAttempts");
         JSONArray wordsArray = config.getJSONArray("words");
         String[] words = new String[wordsArray.length()];
@@ -26,9 +26,11 @@ class HangmanGame {
         this.players = new ArrayList<>();
         this.view = new HangmanView();
         this.playerNames = new HashSet<>();
+        players.add(player);
+        playerNames.add(player.getName());
     }
 
-    public void addPlayer(Player player) {
+    public void addPlayer(HumanPlayer player) {
         if (!playerNames.contains(player.getName())) {
             players.add(player);
             playerNames.add(player.getName());
@@ -46,7 +48,7 @@ class HangmanGame {
         while (true) {
             try {
                 numPlayers = Integer.parseInt(scanner.nextLine());
-                if (numPlayers > 0 && numPlayers <5) {
+                if (numPlayers > -1 && numPlayers <5) {
                     break;
                 } else {
                     System.out.println("Enter a number greater than zero!");
@@ -62,7 +64,7 @@ class HangmanGame {
             while (true) {
                 playerName = scanner.nextLine();
                 if (!playerNames.contains(playerName)) {
-                    addPlayer(new Player(playerName));
+                    addPlayer(new HumanPlayer(playerName));
                     break;
                 } else {
                     System.out.println("Current name already exist");
@@ -71,7 +73,7 @@ class HangmanGame {
         }
 
         while (!isGameOver()) {
-            for (Player p : players) {
+            for (HumanPlayer p : players) {
                 view.displayWord(getGuessedWord());
                 view.displayAttemptsLeft(getAttemptsLeft());
                 view.displayPlayerScore(p);
@@ -83,7 +85,7 @@ class HangmanGame {
             }
         }
 
-        for (Player p : players) {
+        for (HumanPlayer p : players) {
             if (isGameWon()) {
                 p.updateScore(1);
             }
@@ -118,7 +120,7 @@ class HangmanGame {
         return attemptsLeft <= 0;
     }
 
-    public void guessLetter(char letter, Player player) {
+    public void guessLetter(char letter, HumanPlayer player) {
         boolean guessed = false;
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == letter) {
@@ -142,7 +144,7 @@ class HangmanGame {
         return attemptsLeft;
     }
 
-    public List<Player> getPlayers() {
+    public List<HumanPlayer> getPlayers() {
         return players;
     }
 }
