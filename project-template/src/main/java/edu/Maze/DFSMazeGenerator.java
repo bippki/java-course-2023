@@ -16,8 +16,9 @@ public class DFSMazeGenerator extends MazeGenerator {
         Maze maze = new Maze(rows, cols);
         dfs(1, 1, maze);
         // ВЫВЕСТИ В МЕТОДЫ
+        /*
         maze.setCell(1, 0, MazeObjectType.START);
-        maze.setCell(rows - 2, cols - 1, MazeObjectType.END);
+        maze.setCell(rows - 2, cols - 1, MazeObjectType.END);*/
         return maze;
     }
 

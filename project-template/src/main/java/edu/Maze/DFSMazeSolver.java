@@ -1,14 +1,20 @@
 package edu.Maze;
 
 public class DFSMazeSolver extends AbstractMazeSolver {
-    public DFSMazeSolver(Maze maze) {
+    private int startRow;
+    private int startCol;
+
+    public DFSMazeSolver(Maze maze, int startRow, int startCol) {
         super(maze);
+        this.startRow = startRow;
+        this.startCol = startCol;
     }
 
     @Override
     public boolean solveMaze() {
-        return solve(1, 0);
+        return solve(startRow, startCol);
     }
+
     @Override
     public boolean solve(int row, int col) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
