@@ -46,9 +46,28 @@ public class Main {
                 System.out.println("Invalid input. Rows and columns must be greater than 5 and odd.");
             }
         }
-        DFSMazeGenerator dfsMazeGenerator = new DFSMazeGenerator(rows, cols);
-        Maze generatedMaze = dfsMazeGenerator.generateMaze();
 
+        MazeGenerator mazeGenerator = null;
+
+        while (mazeGenerator == null) {
+            System.out.println("Choose maze generation algorithm:");
+            System.out.println("1. DFS");
+            System.out.println("2. Sidewinder");
+            System.out.println("3. Oldos-Broder");
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                mazeGenerator = new DFSMazeGenerator(rows, cols);
+            } else if (choice == 2) {
+                mazeGenerator = new SidewinderMazeGenerator(rows, cols);
+            } else if (choice == 3) {
+                mazeGenerator = new OldMazeGenerator(rows, cols);
+            } else {
+                System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+
+        Maze generatedMaze = mazeGenerator.generateMaze();
         MazePrinter mazePrinter = new MazePrinter();
         mazePrinter.printMaze(generatedMaze);
 
