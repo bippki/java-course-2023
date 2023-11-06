@@ -1,35 +1,39 @@
 package edu.Maze;
 
+
 class Cell {
-    private int x;
-    private int y;
-    private boolean visited;
+    private int row;
+    private int col;
+    private MazeObjectType type;
 
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.visited = false;
+    public Cell(int row, int col, MazeObjectType type) {
+        this.row = row;
+        this.col = col;
+        this.type = type;
     }
 
-    public int getX() {
-        return x;
+    // Getters and setters
+    public int getRow() {
+        return row;
     }
 
-    public int getY() {
-        return y;
+    public void setRow(int row) {
+        this.row = row;
     }
 
-    public boolean isVisited() {
-        return visited;
+    public int getCol() {
+        return col;
     }
 
-    public void setVisited(boolean visited) {
-        this.visited = visited;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public String getAddress() {
-        char file = (char) ('A' + x);
-        int rank = y + 1;
-        return String.valueOf(file) + rank;
+    public MazeObjectType getType() {
+        return type;
+    }
+
+    public void setType(MazeObjectType type) {
+        this.type = type;
     }
 }
