@@ -1,4 +1,4 @@
-package edu.project;
+package edu.HangmanFinal;
 
 import org.json.JSONObject;
 
@@ -17,7 +17,8 @@ public class HangmanMain {
             String content = new String(Files.readAllBytes(Paths.get("config.json")));
             JSONObject obj = new JSONObject(content);
 
-            HangmanGame game = new HangmanGame(obj);
+            HumanPlayer player = new HumanPlayer("MainName");
+            HangmanGame game = new HangmanGame(obj, player);
 
             game.startGame();
 

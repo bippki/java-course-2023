@@ -1,10 +1,10 @@
-package edu.project;
+package edu.HangmanFinal;
 
-class Player {
+class HumanPlayer {
     private final String name;
     private int score;
 
-    public Player(String name) {
+    public HumanPlayer(String name) {
         this.name = name;
         this.score = 0;
     }
