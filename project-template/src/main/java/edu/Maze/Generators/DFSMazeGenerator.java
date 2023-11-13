@@ -1,9 +1,11 @@
-package edu.Maze;
-
+package edu.Maze.Generators;
+import edu.Maze.Structures.Maze;
+import edu.Maze.Structures.MazeObjectType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 
 public class DFSMazeGenerator extends MazeGenerator {
 

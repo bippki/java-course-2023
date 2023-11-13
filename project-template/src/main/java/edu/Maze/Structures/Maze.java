@@ -1,7 +1,6 @@
-package edu.Maze;
+package edu.Maze.Structures;
 
-
-class Maze {
+public class Maze {
     private final Cell[][] cells;
 
     public Maze(int rows, int cols) {

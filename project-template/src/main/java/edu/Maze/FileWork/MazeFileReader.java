@@ -1,5 +1,7 @@
-package edu.Maze;
+package edu.Maze.FileWork;
 
+import edu.Maze.Structures.Maze;
+import edu.Maze.Structures.MazeObjectType;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

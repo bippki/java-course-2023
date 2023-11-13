@@ -1,8 +1,9 @@
-package edu.Maze;
+package edu.Maze.Generators;
 
+import edu.Maze.Structures.Maze;
 import java.util.Random;
 
-abstract class MazeGenerator {
+public abstract class MazeGenerator {
     protected int rows;
     protected int cols;
     protected Maze maze;

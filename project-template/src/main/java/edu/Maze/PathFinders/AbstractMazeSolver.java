@@ -1,6 +1,8 @@
-package edu.Maze;
+package edu.Maze.PathFinders;
 
-abstract class AbstractMazeSolver {
+import edu.Maze.Structures.Maze;
+
+public abstract class AbstractMazeSolver {
     protected Maze maze;
     protected boolean[][] visited;
     protected int rows;
@@ -13,7 +15,7 @@ abstract class AbstractMazeSolver {
         this.visited = new boolean[rows][cols];
     }
 
-    protected abstract boolean solveMaze();
+    public abstract boolean solveMaze();
 
     protected abstract boolean solve(int row, int col);
 }

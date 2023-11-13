@@ -1,4 +1,8 @@
-package edu.Maze;
+package edu.Maze.PathFinders;
+
+import edu.Maze.PathFinders.AbstractMazeSolver;
+import edu.Maze.Structures.Maze;
+import edu.Maze.Structures.MazeObjectType;
 
 public class DFSMazeSolver extends AbstractMazeSolver {
     private int startRow;

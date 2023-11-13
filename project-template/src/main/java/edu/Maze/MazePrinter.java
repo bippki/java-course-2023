@@ -1,5 +1,8 @@
 package edu.Maze;
 
+import edu.Maze.Structures.Maze;
+import edu.Maze.Structures.MazeObjectType;
+
 class MazePrinter {
 
     public void printMaze(Maze maze) {

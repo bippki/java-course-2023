@@ -1,4 +1,7 @@
-package edu.Maze;
+package edu.Maze.Generators;
+
+import edu.Maze.Structures.MazeObjectType;
+import edu.Maze.Structures.Maze;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,9 +1,8 @@
-package edu.Maze;
+package edu.Maze.Structures;
 
-
-class Cell {
-    private int row;
-    private int col;
+public class Cell {
+    public int row;
+    public int col;
     private MazeObjectType type;
 
     public Cell(int row, int col, MazeObjectType type) {
@@ -12,7 +11,6 @@ class Cell {
         this.type = type;
     }
 
-    // Getters and setters
     public int getRow() {
         return row;
     }

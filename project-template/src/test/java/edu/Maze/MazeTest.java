@@ -7,6 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+
+import edu.Maze.FileWork.MazeFileReader;
+import edu.Maze.FileWork.MazeFileWriter;
+import edu.Maze.PathFinders.AbstractMazeSolver;
+import edu.Maze.PathFinders.DFSMazeSolver;
+import edu.Maze.Structures.Maze;
+import edu.Maze.Structures.MazeObjectType;
 import org.junit.jupiter.api.Test;
 
 public class MazeTest {
@@ -117,6 +124,13 @@ public class MazeTest {
 
         AbstractMazeSolver mazeSolver = new DFSMazeSolver(mazeInput,1,1);
         assertTrue(mazeSolver.solveMaze());
+        assertEquals(MazeObjectType.VISITED, mazeInput.getCell(1, 1).getType());
+        assertEquals(MazeObjectType.VISITED, mazeInput.getCell(1, 2).getType());
+        assertEquals(MazeObjectType.VISITED, mazeInput.getCell(1, 3).getType());
+        assertEquals(MazeObjectType.VISITED, mazeInput.getCell(2, 3).getType());
+        assertEquals(MazeObjectType.END, mazeInput.getCell(3, 3).getType());
+        assertEquals(MazeObjectType.EMPTY, mazeInput.getCell(3, 1).getType());
+        assertEquals(MazeObjectType.EMPTY, mazeInput.getCell(3, 2).getType());
     }
 }
 

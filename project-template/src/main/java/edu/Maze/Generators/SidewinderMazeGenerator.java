@@ -1,6 +1,7 @@
-package edu.Maze;
+package edu.Maze.Generators;
 
-import java.util.Random;
+import edu.Maze.Structures.MazeObjectType;
+import edu.Maze.Structures.Maze;
 
 public class SidewinderMazeGenerator extends MazeGenerator {
 
