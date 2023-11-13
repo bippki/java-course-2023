@@ -73,6 +73,11 @@
             <version>${jetbrains-annotations.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
 
         <!-- Logging -->
         <dependency>
@@ -94,6 +99,11 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-util-ajax</artifactId>
+            <version>9.4.51.v20230217</version>
         </dependency>
     </dependencies>
 
