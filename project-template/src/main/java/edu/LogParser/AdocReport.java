@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.repeat;
 
 class AdocReport extends Report {
-    public AdocReport(String logPath, List<LogEntry> entries) {
-        super(logPath, entries);
+    public AdocReport(String logPath, List<LogEntry> entries, LocalDate a, LocalDate b) {
+        super(logPath, entries,a,b);
     }
     @Override
     public String generateReport() {

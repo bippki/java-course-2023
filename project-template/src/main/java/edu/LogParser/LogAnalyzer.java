@@ -23,13 +23,12 @@ public class LogAnalyzer {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
 
-    private static LogEntry parseLogEntry(String logLine) {
+    static LogEntry parseLogEntry(String logLine) {
         Matcher matcher = LOG_PATTERN.matcher(logLine);
 
         if (matcher.matches()) {
             String ip = matcher.group(1);
             String timestampStr = matcher.group(2);
-
             String request = matcher.group(3);
             int statusCode = Integer.parseInt(matcher.group(4));
             int responseSize = Integer.parseInt(matcher.group(5));
@@ -68,7 +67,7 @@ public class LogAnalyzer {
                 .collect(Collectors.toList());
     }
 
-    private static List<LogEntry> readLogEntriesFromFile(Path filePath) {
+    static List<LogEntry> readLogEntriesFromFile(Path filePath) {
         try {
             return Files.lines(filePath)
                     .map(LogAnalyzer::parseLogEntry)
@@ -118,6 +117,13 @@ public class LogAnalyzer {
         return logEntries;
     }
 
+    static int getSize(List<LogEntry> logEntries, LocalDate fromDate, LocalDate toDate) {
+        long count = logEntries.stream()
+            .filter(entry -> isWithinDateRange(entry.timestamp(), fromDate, toDate))
+            .count();
+
+        return (int) count;
+    }
     static double getAverageResponseSize(List<LogEntry> logEntries, LocalDate fromDate, LocalDate toDate) {
         List<LogEntry> filteredEntries = logEntries.stream()
                 .filter(entry -> isWithinDateRange(entry.timestamp(), fromDate, toDate))

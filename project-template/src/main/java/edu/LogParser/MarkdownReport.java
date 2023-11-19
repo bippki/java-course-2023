@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 class MarkdownReport extends Report {
-    public MarkdownReport(String logPath, List<LogEntry> entries) {
-        super(logPath, entries);
+    public MarkdownReport(String logPath, List<LogEntry> entries,LocalDate a, LocalDate b) {
+        super(logPath, entries,a,b);
     }
 
     @Override

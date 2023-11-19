@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import static edu.LogParser.LogAnalyzer.getSize;
 
 public abstract class Report {
     @Getter
@@ -38,20 +39,20 @@ public abstract class Report {
     @Getter
     protected final String[][] dataSectionCodes;
 
-    public Report(String logPath, List<LogEntry> entries) {
+    public Report(String logPath, List<LogEntry> entries,LocalDate a, LocalDate b) {
         this.entries = entries;
         this.logPath = logPath;
         this.toSave = new StringBuilder();
-
+        this.fromDate = a;
+        this.toDate = b;
         this.headersSectionMain = new String[]{"Метрика", "Значение"};
         this.dataSectionMain = new String[][]{
                 {"Файл (-ы)", getLogPath()},
-                {"Начальная дата", (getFromDate() != null ? getFromDate().format(DateTimeFormatter.ISO_DATE) : "-")},
-                {"Конечная дата", (getToDate() != null ? getToDate().format(DateTimeFormatter.ISO_DATE) : "-")},
-                {"Количество запросов", String.valueOf(getEntries().size())},
-                {"Средний размер ответа", LogAnalyzer.getAverageResponseSize(getEntries(), getFromDate(), getToDate()) + "b"}
+                {"Начальная дата", (a != null ? a.format(DateTimeFormatter.ISO_DATE) : "-")},
+                {"Конечная дата", (b != null ? b.format(DateTimeFormatter.ISO_DATE) : "-")},
+                {"Количество запросов", String.valueOf(getSize(getEntries(), a, b))},
+                {"Средний размер ответа", LogAnalyzer.getAverageResponseSize(getEntries(), a, b) + "b"}
         };
-
         Map<String, Long> resourceMap = LogAnalyzer.getResourceRequests(getEntries(), getFromDate(), getToDate());
 
         this.headersSectionResources = new String[] {"Ресурс", "Количество"};
