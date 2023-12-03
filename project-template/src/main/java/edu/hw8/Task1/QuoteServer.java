@@ -11,6 +11,8 @@ public class QuoteServer {
     private static final int PORT = 8080;
     private static final int MAX_CONNECTIONS = 5;
 
+    private QuoteServer(){};
+
     private ServerSocket serverSocket;
     private ExecutorService executorService;
 

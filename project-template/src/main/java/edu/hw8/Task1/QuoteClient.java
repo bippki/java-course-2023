@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class QuoteClient {
+    private QuoteClient(){};
     private static final String SERVER_HOST = "localhost";
     private static final int SERVER_PORT = 8080;
 
