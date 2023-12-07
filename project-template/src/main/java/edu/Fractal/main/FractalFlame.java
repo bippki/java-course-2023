@@ -1,4 +1,4 @@
-package edu.Fractal.test;
+package edu.Fractal.main;
 
 import edu.Fractal.ChaosGame;
 import edu.Fractal.image.IO;
