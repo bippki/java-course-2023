@@ -1,12 +1,10 @@
-package edu.hw9.Maze;
-
-
+package edu.Maze;
+import edu.Maze.PathFinders.AbstractMazeSolver;
 import edu.Maze.Generators.MazeGenerator;
 import edu.Maze.Input.MazeCoordinateInputHandler;
 import edu.Maze.Input.MazeGeneratorSelector;
 import edu.Maze.Input.MazeInputHandler;
-import edu.Maze.MazePrinter;
-import edu.Maze.PathFinders.AbstractMazeSolver;
+import edu.Maze.PathFinders.MTDFSMazeSolver;
 import edu.Maze.Structures.Maze;
 import edu.Maze.Structures.MazeObjectType;
 import java.util.Scanner;

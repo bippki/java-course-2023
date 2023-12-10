@@ -1,14 +1,12 @@
-package edu.hw9.Maze;
+package edu.Maze.PathFinders;
 
 import edu.Maze.PathFinders.AbstractMazeSolver;
 import edu.Maze.Structures.Maze;
 import edu.Maze.Structures.MazeObjectType;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class MTDFSMazeSolver extends AbstractMazeSolver {
     private int startRow;
