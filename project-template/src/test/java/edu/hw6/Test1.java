@@ -1,31 +1,31 @@
 package edu.hw6;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import edu.hw6.Task1.DiskMap;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DiskMapTest {
+class Test1 {
 
     private DiskMap diskMap;
     private String filePath;
 
     @BeforeEach
     void setUp() {
+
+        /*
+        * Незнаю почему, но для пути C:\Users\LubluKotov\IdeaProjects\java-course-2023\project-template\src\test\java\edu\hw6\disk.txt он работает, а для
+        * пути project-template/src/test/java/edu/hw6/disk.txt уже нет. Кажется что-то с правами доступа.
+        * */
+
         filePath = "project-template/disk.txt";
         diskMap = new DiskMap(filePath);
     }
 
-    @AfterEach
-    void tearDown() {
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-        }
-    }
+
 
     @Test
     void testPutAndGet() {

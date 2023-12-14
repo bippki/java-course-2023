@@ -10,16 +10,15 @@ import java.util.regex.Pattern;
 public class HackerNews {
 
     private final HttpClient httpClient;
+    private final Pattern titlePattern = Pattern.compile("\"title\"\\s*:\\s*\"([^\"]*)\"");
 
-    public HackerNews() {
-        this.httpClient = HttpClient.newHttpClient();
-    }
+    public HackerNews() {this.httpClient = HttpClient.newHttpClient();}
 
     public long[] hackerNewsTopStories() {
         HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(java.net.URI.create("https://hacker-news.firebaseio.com/v0/topstories.json"))
-                .build();
+            .GET()
+            .uri(java.net.URI.create("https://hacker-news.firebaseio.com/v0/topstories.json"))
+            .build();
 
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -43,16 +42,14 @@ public class HackerNews {
 
     public String news(long id) {
         HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .uri(java.net.URI.create("https://hacker-news.firebaseio.com/v0/item/" + id + ".json"))
-                .build();
+            .GET()
+            .uri(java.net.URI.create("https://hacker-news.firebaseio.com/v0/item/" + id + ".json"))
+            .build();
 
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             String json = response.body();
-
-            Pattern pattern = Pattern.compile("\"title\"\\s*:\\s*\"([^\"]*)\"");
-            Matcher matcher = pattern.matcher(json);
+            Matcher matcher = titlePattern.matcher(json);
 
             if (matcher.find()) {
                 return matcher.group(1);

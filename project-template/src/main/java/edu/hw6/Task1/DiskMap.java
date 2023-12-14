@@ -85,16 +85,16 @@ public class DiskMap implements Map<String, String> {
 
     private Map<String, String> getAllPairs() {
         Map<String, String> pairs = new HashMap<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(storageFile));
+        try (BufferedReader reader = new BufferedReader(new FileReader(storageFile))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] pair = line.split(":");
-                if (pair.length == 2) {
-                    pairs.put(pair[0], pair[1]);
+                if (!line.isEmpty()) {
+                    String[] pair = line.split(":");
+                    if (pair.length == 2) {
+                        pairs.put(pair[0], pair[1]);
+                    }
                 }
             }
-            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,12 +102,10 @@ public class DiskMap implements Map<String, String> {
     }
 
     private void writeToFile(Map<String, String> allPairs) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(storageFile))) {
             for (Entry<String, String> entry : allPairs.entrySet()) {
                 writer.write(entry.getKey() + ":" + entry.getValue() + "\n");
             }
-            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
